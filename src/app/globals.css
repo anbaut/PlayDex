@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #07090f;
+  --color-panel: #10141f;
+  --color-panel-2: #161c2a;
+  --color-line: rgb(255 255 255 / 0.07);
+  --color-ink: #e8eaf0;
+  --color-muted: #8b93a7;
+  --color-accent: #3987e5;
+  --color-accent-2: #22d3ee;
+  --color-good: #34d399;
+  --color-warn: #fab219;
+  --color-bad: #f87171;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-grotesk), var(--font-inter), sans-serif;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+/* Halo d'ambiance fixe derrière toute l'appli */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(1100px 600px at 0% -10%, rgb(57 135 229 / 0.18), transparent 60%),
+    radial-gradient(900px 520px at 100% 0%, rgb(34 211 238 / 0.09), transparent 60%),
+    radial-gradient(800px 600px at 50% 110%, rgb(57 135 229 / 0.08), transparent 60%);
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-gradient-accent {
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-2));
+}
+
+.glass {
+  background: linear-gradient(180deg, rgb(22 28 42 / 0.85), rgb(16 20 31 / 0.85));
+  border: 1px solid var(--color-line);
+  backdrop-filter: blur(14px);
+}
+
+.cover-fallback {
+  background: linear-gradient(135deg, #1c2a4a, #0e3a4a);
+}
+
+/* Curseur de pondération */
+input[type="range"].slider {
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-accent) var(--fill), rgb(255 255 255 / 0.08) var(--fill));
+  outline: none;
+}
+input[type="range"].slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgb(57 135 229 / 0.35), 0 4px 12px rgb(0 0 0 / 0.5);
+  cursor: pointer;
+}
+input[type="range"].slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgb(57 135 229 / 0.35);
+  cursor: pointer;
+}
+
+/* Défilement infini du mur de jaquettes de l'accueil */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee var(--speed, 60s) linear infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: rgb(255 255 255 / 0.08); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgb(255 255 255 / 0.16); }
+
+.recharts-wrapper *:focus { outline: none; }
