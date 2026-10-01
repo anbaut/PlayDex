@@ -3,6 +3,21 @@
 Ta bibliothèque Steam en Pokédex. Chaque jeu numéroté (N° 001 = le plus ancien), chaque heure comptée : temps de jeu, valeur de la collection, jeux jamais lancés, succès, séries
 à compléter, wishlist, amis, historique, et un score transparent pour choisir le prochain jeu.
 
+![Playdex : la bibliothèque](docs/screenshots/bibliotheque.png)
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/a-jouer.png" alt="Quoi jouer ensuite"><br><b>Quoi jouer ensuite</b> : un score expliqué ligne par ligne, réglable au curseur.</td>
+    <td width="50%"><img src="docs/screenshots/fiche.png" alt="Fiche d'un jeu"><br><b>Fiche d'un jeu</b> : N° de Dex, avis Steam, prix, coût par heure, succès.</td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="docs/screenshots/mur-de-la-honte.png" alt="Mur de la honte"><br><b>Mur de la honte</b> : les jeux jamais lancés, les plus chers d'abord.</td>
+    <td width="50%"><img src="docs/screenshots/stats.png" alt="Statistiques"><br><b>Statistiques</b> : où passe ton temps, tes tags, ton rythme.</td>
+  </tr>
+</table>
+
+<sub>Captures réalisées avec la bibliothèque de démonstration intégrée.</sub>
+
 Next.js 16 · React 19 · TypeScript · Tailwind 4 · Motion · Recharts. Pas de base de données :
 tout est mis en cache dans `data/*.json`.
 
@@ -25,7 +40,10 @@ Puis <http://localhost:3000> et « Voir la démo » pour tester sans compte (la 
 4. Redémarre `npm run dev`, puis clique « Synchroniser ».
 
 L'appli se resynchronise toute seule à l'ouverture si la dernière synchro a plus de 6 h.
-L'onglet ouvert est dans l'URL (`?tab=achievements`…).
+L'onglet ouvert est dans l'URL (`?tab=achievements`…), et `?game=<appid>` ouvre directement la fiche d'un jeu.
+
+Pour faire tourner une seconde instance avec d'autres données (une démo par exemple), pointe
+`PLAYDEX_DATA_DIR` vers un autre dossier : `data/` n'est alors pas touché.
 
 ### Facultatif : durées pour finir (IGDB)
 

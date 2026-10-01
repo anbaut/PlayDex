@@ -38,8 +38,8 @@ type TabId = (typeof TABS)[number]["id"];
 /** Au-delà, l'appli se resynchronise toute seule à l'ouverture (et alimente l'historique). */
 const AUTO_SYNC_AFTER_S = 6 * 3600;
 
-export default function Dashboard({ data, configured, igdb, initialTab }: {
-  data: AppData; configured: boolean; igdb: boolean; initialTab?: string;
+export default function Dashboard({ data, configured, igdb, initialTab, initialGame }: {
+  data: AppData; configured: boolean; igdb: boolean; initialTab?: string; initialGame?: number;
 }) {
   const { library } = data;
   const [tab, setTabState] = useState<TabId>(TABS.some((t) => t.id === initialTab) ? (initialTab as TabId) : "library");
@@ -48,7 +48,10 @@ export default function Dashboard({ data, configured, igdb, initialTab }: {
     setTabState(id);
     window.history.replaceState(null, "", id === "library" ? "/" : `?tab=${id}`);
   };
-  const [selected, setSelected] = useState<Game | null>(null);
+  // ?game=<appid> ouvre directement la fiche d'un jeu (lien partageable)
+  const [selected, setSelected] = useState<Game | null>(
+    () => library.games.find((g) => g.appid === initialGame) ?? data.wishlist.find((g) => g.appid === initialGame) ?? null,
+  );
   const stats = useMemo(() => overview(library.games), [library.games]);
   const deals = useMemo(() => data.wishlist.filter(isDeal).length, [data.wishlist]);
   const sync = useSync();

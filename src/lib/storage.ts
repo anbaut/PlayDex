@@ -3,7 +3,8 @@ import { mkdir, readFile, rename, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { AchSummary, Duration, Game, LibraryFile, OwnedGame, StoreInfo } from "./types";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+/** Dossier des données ; PLAYDEX_DATA_DIR permet d'en utiliser un autre (démo, captures d'écran…). */
+const DATA_DIR = process.env.PLAYDEX_DATA_DIR || path.join(process.cwd(), "data");
 const CDN = (appid: number) =>
   `https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/${appid}/header.jpg`;
 
